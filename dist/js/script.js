@@ -36,19 +36,27 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Timer
-  const deadline = '2025-06-30';
+  const deadline = '2025-05-30';
   function getTimeRemaining(endtime) {
-    const t = Date.parse(endtime) - Date.parse(new Date()),
-      days = Math.floor(t / (1000 * 60 * 60 * 24)),
-      hours = Math.floor(t / 1000 * 60 * 60 % 24),
-      minutes = Math.floor(t / 1000 / 60 % 60),
-      seconds = Math.floor(t / 1000 % 60);
+    let days, hours, minutes, seconds;
+    const total = Date.parse(endtime) - Date.parse(new Date());
+    if (total <= 0) {
+      days = 0;
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
+    } else {
+      days = Math.floor(total / (1000 * 60 * 60 * 24));
+      hours = Math.floor(total / 1000 * 60 * 60 % 24);
+      minutes = Math.floor(total / 1000 / 60 % 60);
+      seconds = Math.floor(total / 1000 % 60);
+    }
     return {
-      'tottal': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
+      total,
+      days,
+      hours,
+      minutes,
+      seconds
     };
   }
   function getZero(num) {
@@ -72,7 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
       hours.innerHTML = getZero(data.hours);
       minutes.innerHTML = getZero(data.minutes);
       seconds.innerHTML = getZero(data.seconds);
-      if (data.tottal <= 0) {
+      if (data.total <= 0) {
         clearInterval(timeInterval);
       }
     }
