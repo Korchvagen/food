@@ -29,5 +29,8 @@
 		"last 2 chrome versions",
 		"last 2 firefox versions",
 		"last 2 ios versions"
-	]
+	],
+	"dependencies": {
+		"axios": "^1.10.0"
+	}
 }
